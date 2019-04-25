@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { Location, Permissions } from 'expo';
+import { Location, Permissions, MapView } from 'expo';
 import yelpToken from './secret.js';
-import { MapView } from 'expo';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import ResultsScreen from './Results';
+import BarContainer from './BarContainer';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -13,11 +15,9 @@ export default class App extends React.Component {
     };
     this.getYelpAPI = this.getYelpAPI.bind(this);
     this._getLocation = this._getLocation.bind(this);
-    this.handlePress = this.handlePress.bind(this);
   }
   async getYelpAPI(lat, long) {
     try {
-      console.log('IM IN TRY');
       let url = `https://api.yelp.com/v3/businesses/search?term=bars&latitude=${lat}&longitude=${long}&limit=2`;
       await fetch(url, {
         method: 'GET',
@@ -36,9 +36,6 @@ export default class App extends React.Component {
     }
   }
 
-  handlePress() {
-    console.log('I was just pressed');
-  }
   _getLocation = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
@@ -61,6 +58,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         {this.state.location ? (
@@ -81,7 +79,15 @@ export default class App extends React.Component {
                 longitudeDelta: 0.0421,
               }}
             />
-            <Button onPress={this.handlePress} title="Press Me" color="black" />
+            <Button
+              onPress={() =>
+                navigate('Results', {
+                  latitude: this.state.location.coords.latitude,
+                })
+              }
+              title="Press Me"
+              color="black"
+            />
           </View>
         ) : (
           <Text>Loading...</Text>
@@ -90,6 +96,27 @@ export default class App extends React.Component {
     );
   }
 }
+
+class YelpScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>IM IN YELP SCREEN</Text>
+      </View>
+    );
+  }
+}
+
+const MainNavigator = createStackNavigator({
+  App: { screen: App },
+  Yelp: { screen: YelpScreen },
+  Results: { screen: ResultsScreen },
+  Bars: { screen: BarContainer },
+});
+
+const Apps = createAppContainer(MainNavigator);
+
+export default Apps;
 
 const styles = StyleSheet.create({
   container: {
