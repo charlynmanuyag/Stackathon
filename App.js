@@ -10,7 +10,6 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 class App extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
-    console.log('NAVIGATE', this.props);
     return (
       <View style={styles.container}>
         <Text>Welcome To Crawl!</Text>

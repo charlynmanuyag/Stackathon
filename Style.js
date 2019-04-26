@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: 'black',
   },
+  bars: {
+    alignItems: 'center',
+  },
 });
 
 export default styles;
