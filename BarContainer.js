@@ -1,7 +1,16 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import styles from './Style.js';
 
 export default class BarContainer extends React.Component {
+  constructor() {
+    super();
+    this.handlePinMe = this.handlePinMe.bind(this);
+  }
+
+  handlePinMe() {
+    console.log('i was pinned');
+  }
   render() {
     const bars = this.props.bars.businesses;
     return (
@@ -17,6 +26,10 @@ export default class BarContainer extends React.Component {
               <Text>
                 Location: {bar.location.display_address.toString(' ')}
               </Text>
+              {bar.is_closed ? <Text>Open</Text> : <Text>Closed</Text>}
+              <TouchableOpacity onPress={this.handlePinMe} style={styles.pinMe}>
+                <Text>Pin Me</Text>
+              </TouchableOpacity>
             </View>
           );
         })}
