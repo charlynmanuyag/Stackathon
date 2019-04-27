@@ -10,8 +10,9 @@ import {
 import styles from './Style.js';
 
 export default class BarContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.handlePinMe = this.handlePinMe.bind(this);
     this.storeBarId = this.storeBarId.bind(this);
     this.getBarId = this.getBarId.bind(this);
@@ -36,7 +37,6 @@ export default class BarContainer extends React.Component {
   }
 
   handlePinMe(barId, barInfo) {
-    console.log('BAR INFO', barInfo);
     console.log('i was pinned');
     this.getBarId(barId).then(response => {
       if (!response) {
@@ -45,6 +45,7 @@ export default class BarContainer extends React.Component {
         console.log('You already pinned me');
       }
     });
+    // this.props.navigation.navigate('Board');
   }
   clearData() {
     AsyncStorage.clear();

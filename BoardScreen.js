@@ -9,8 +9,8 @@ import {
 import BoardContainer from './BoardContainer.js';
 
 export default class BoardScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       bars: null,
     };
@@ -29,9 +29,19 @@ export default class BoardScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log('IN MOUNT');
     this.getAllBars();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('IT DID UPDATE');
+    console.log('PREV STATE', prevState);
+    console.log('PREV PROPS', prevProps);
+    console.log('PROPSS', this.state);
+  }
+
   render() {
+    console.log('IN RENDER');
     return (
       <ScrollView style={{ flex: 1 }}>
         <View>

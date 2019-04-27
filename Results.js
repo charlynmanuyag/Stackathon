@@ -6,8 +6,8 @@ import { Location, Permissions, MapView } from 'expo';
 import styles from './Style.js';
 
 export default class ResultsScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       errorMessage: '',
       location: null,
@@ -58,13 +58,14 @@ export default class ResultsScreen extends React.Component {
   }
 
   render() {
+    console.log('in results');
     return (
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           {this.state.location && this.state.bars ? (
             <View>
               <Text>Here are the bars close to you </Text>
-              <BarContainer bars={this.state.bars} />
+              <BarContainer bars={this.state.bars} {...this.props} />
             </View>
           ) : (
             <Text>Loading...</Text>

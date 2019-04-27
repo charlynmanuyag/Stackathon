@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, Header } from 'react-native';
+import { Text, View, Button, Header, Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ResultsScreen from './Results';
@@ -12,6 +12,10 @@ class App extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+        <View style={styles.images}>
+          <Image source={require('./img/beer.png')} />
+          <Image source={require('./img/cocktail.png')} />
+        </View>
         <Text>Welcome To Crawl!</Text>
         <Button
           onPress={() => navigate('Results')}

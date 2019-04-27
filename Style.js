@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
   bars: {
     alignItems: 'center',
   },
+  images: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 10,
+  },
 });
 
 export default styles;
