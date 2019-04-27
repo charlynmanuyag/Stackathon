@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   View,
+  Button,
   Image,
   TouchableOpacity,
   AsyncStorage,
@@ -14,6 +15,7 @@ export default class BarContainer extends React.Component {
     this.handlePinMe = this.handlePinMe.bind(this);
     this.storeBarId = this.storeBarId.bind(this);
     this.getBarId = this.getBarId.bind(this);
+    this.clearData = this.clearData.bind(this);
   }
 
   async storeBarId(barId, barInfo) {
@@ -32,6 +34,7 @@ export default class BarContainer extends React.Component {
     }
     return fetchedId;
   }
+
   handlePinMe(barId, barInfo) {
     console.log('BAR INFO', barInfo);
     console.log('i was pinned');
@@ -42,6 +45,9 @@ export default class BarContainer extends React.Component {
         console.log('You already pinned me');
       }
     });
+  }
+  clearData() {
+    AsyncStorage.clear();
   }
   render() {
     const bars = this.props.bars.businesses;
@@ -80,6 +86,7 @@ export default class BarContainer extends React.Component {
             </View>
           );
         })}
+        <Button onPress={this.clearData} title="Clear Data" />
       </View>
     );
   }
