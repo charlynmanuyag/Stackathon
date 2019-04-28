@@ -1,26 +1,62 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import styles from './Style';
 
 export default class BoardContainer extends React.Component {
+  // constructor() {
+  //   super()
+  //   this.handleUnpin = this.handleUnpin.bind(this)
+  // }
+  // async unPin(id) {
+  //   try {
+  //     uu
+  //   }
+  // }
+  // handleUnpin() {
+
+  // }
   render() {
     const bars = this.props.bars;
     return (
       <View>
         {bars.map(bar => {
           return (
-            <View key={bar[0]}>
+            <View style={styles.boardContainer} key={bar[0]}>
               <Image
                 source={{
                   uri: `${JSON.parse(bar[1].replace(/\\/g, ' ')).image}`,
                 }}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 200, height: 200, borderRadius: 10 }}
               />
-              <Text>Name: {JSON.parse(bar[1].replace(/\\/g, ' ')).name}</Text>
-              <Text>Phone: {JSON.parse(bar[1].replace(/\\/g, ' ')).phone}</Text>
-              <Text>
+              <Text style={styles.barInfo}>
+                Name: {JSON.parse(bar[1].replace(/\\/g, ' ')).name}
+              </Text>
+              <Text style={styles.barInfo}>
+                Address: {JSON.parse(bar[1].replace(/\\/g, ' ')).location}
+              </Text>
+              <Text style={styles.barInfo}>
+                Phone: {JSON.parse(bar[1].replace(/\\/g, ' ')).phone}
+              </Text>
+              <Text style={styles.barInfo}>
                 Rating: {JSON.parse(bar[1].replace(/\\/g, ' ')).rating} stars
               </Text>
-              <Text>Price: {JSON.parse(bar[1].replace(/\\/g, ' ')).price}</Text>
+              <Text style={styles.barInfo}>
+                Price: {JSON.parse(bar[1].replace(/\\/g, ' ')).price}
+              </Text>
+              <TouchableOpacity
+                style={styles.unpinMe}
+                // onPress={() => this.handleUnpin()}
+              >
+                <Text
+                  style={{
+                    fontFamily: 'MarkerFelt-Thin',
+                    fontSize: 17,
+                    color: 'white',
+                  }}
+                >
+                  Unpin Me
+                </Text>
+              </TouchableOpacity>
             </View>
           );
         })}

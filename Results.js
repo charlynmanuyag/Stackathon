@@ -4,6 +4,7 @@ import BarContainer from './BarContainer';
 import yelpToken from './secret.js';
 import { Location, Permissions, MapView } from 'expo';
 import styles from './Style.js';
+import TabNavigator from './TabNavigator';
 
 export default class ResultsScreen extends React.Component {
   constructor(props) {
@@ -59,19 +60,37 @@ export default class ResultsScreen extends React.Component {
 
   render() {
     console.log('in results');
+    const { navigate } = this.props.navigation;
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          {this.state.location && this.state.bars ? (
-            <View>
-              <Text>Here are the bars close to you </Text>
-              <BarContainer bars={this.state.bars} {...this.props} />
-            </View>
-          ) : (
-            <Text>Loading...</Text>
-          )}
-        </View>
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView style={{ flexGrow: 1 }}>
+          <View style={styles.container}>
+            {this.state.location && this.state.bars ? (
+              <View>
+                <Text style={styles.resultsTitle}>
+                  Here are the bars close to you{' '}
+                </Text>
+                <BarContainer bars={this.state.bars} {...this.props} />
+                <Button
+                  onPress={() => navigate('Board')}
+                  title="Click to Board"
+                  color="black"
+                />
+              </View>
+            ) : (
+              <Text
+                style={{
+                  flex: 1,
+                  padding: 20,
+                  justifyContent: 'center',
+                }}
+              >
+                Hold on. We are looking bars near you!
+              </Text>
+            )}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

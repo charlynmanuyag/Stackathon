@@ -45,7 +45,6 @@ export default class BarContainer extends React.Component {
         console.log('You already pinned me');
       }
     });
-    // this.props.navigation.navigate('Board');
   }
   clearData() {
     AsyncStorage.clear();
@@ -59,16 +58,36 @@ export default class BarContainer extends React.Component {
             <View key={bar.id} style={styles.bars}>
               <Image
                 source={{ uri: `${bar.image_url}` }}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 200, height: 200, borderRadius: 10 }}
               />
-              <Text>Name: {bar.name}</Text>
-              <Text>
+              <Text
+                style={{
+                  fontFamily: 'MarkerFelt-Thin',
+                  fontSize: 17,
+                  marginTop: 10,
+                }}
+              >
+                Name: {bar.name}
+              </Text>
+              <Text style={styles.barInfo}>
                 Location: {bar.location.display_address.toString(' ')}
               </Text>
-              {bar.is_closed ? <Text>Closed</Text> : <Text>Open</Text>}
-              <Text>Phone: {bar.display_phone}</Text>
-              <Text>Rating: {bar.rating} stars</Text>
-              <Text>Price: {bar.price}</Text>
+              {bar.is_closed ? (
+                <Text style={styles.barInfo}>Closed</Text>
+              ) : (
+                <Text style={styles.barInfo}>Open</Text>
+              )}
+              <Text style={styles.barInfo}>Phone: {bar.display_phone}</Text>
+              <Text style={styles.barInfo}>Rating: {bar.rating} stars</Text>
+              <Text
+                style={{
+                  fontFamily: 'MarkerFelt-Thin',
+                  fontSize: 17,
+                  marginBottom: 10,
+                }}
+              >
+                Price: {bar.price}
+              </Text>
               <TouchableOpacity
                 onPress={() =>
                   this.handlePinMe(bar.id, {
@@ -82,7 +101,15 @@ export default class BarContainer extends React.Component {
                 }
                 style={styles.pinMe}
               >
-                <Text>Pin Me</Text>
+                <Text
+                  style={{
+                    fontFamily: 'MarkerFelt-Thin',
+                    fontSize: 17,
+                    color: 'white',
+                  }}
+                >
+                  Pin Me
+                </Text>
               </TouchableOpacity>
             </View>
           );

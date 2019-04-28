@@ -7,6 +7,8 @@ import {
   ScrollView,
 } from 'react-native';
 import BoardContainer from './BoardContainer.js';
+import TabNavigator from './TabNavigator.js';
+import styles from './Style.js';
 
 export default class BoardScreen extends React.Component {
   constructor(props) {
@@ -29,30 +31,24 @@ export default class BoardScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log('IN MOUNT');
     this.getAllBars();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('IT DID UPDATE');
-    console.log('PREV STATE', prevState);
-    console.log('PREV PROPS', prevProps);
-    console.log('PROPSS', this.state);
-  }
-
   render() {
-    console.log('IN RENDER');
+    const { navigate } = this.props.navigation;
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <View>
-          <Text>Here is your board!</Text>
-          {this.state.bars ? (
-            <BoardContainer bars={this.state.bars} />
-          ) : (
-            <Text>Loading</Text>
-          )}
-        </View>
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={{ flex: 0.8 }}>
+            <Text>Here is your board!</Text>
+            {this.state.bars ? (
+              <BoardContainer bars={this.state.bars} />
+            ) : (
+              <Text>Loading</Text>
+            )}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

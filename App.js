@@ -1,46 +1,51 @@
 import React from 'react';
-import { Text, View, Button, Header, Image } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ResultsScreen from './Results';
 import styles from './Style.js';
 import BoardScreen from './BoardScreen';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import TabNavigator from './TabNavigator';
 
 class App extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View style={styles.images}>
-          <Image source={require('./img/beer.png')} />
-          <Image source={require('./img/cocktail.png')} />
+        <View style={styles.topView}>
+          <View style={styles.images}>
+            <Image source={require('./img/beer.png')} />
+            <Image source={require('./img/cocktail.png')} />
+          </View>
+          <Text
+            style={{ fontFamily: 'Marker Felt', fontSize: 30, marginTop: 20 }}
+          >
+            Welcome To Crawl!
+          </Text>
+          <TouchableOpacity
+            style={styles.start}
+            onPress={() => navigate('Results')}
+          >
+            <Text style={{ fontFamily: 'MarkerFelt-Thin', fontSize: 17 }}>
+              Start Your Bar Crawl
+            </Text>
+          </TouchableOpacity>
         </View>
-        <Text>Welcome To Crawl!</Text>
-        <Button
-          onPress={() => navigate('Results')}
-          title="Start Your Bar Crawl"
-          color="black"
-        />
+        <View style={styles.tabContainer}>
+          <TabNavigator navigate={navigate} />
+        </View>
       </View>
     );
   }
 }
 
-const TabNavigator = createMaterialBottomTabNavigator(
-  {
-    Home: { screen: App },
-    Results: { screen: ResultsScreen },
-    Board: { screen: BoardScreen },
-  },
-  {
-    initialRouteName: 'Home',
-    activeColor: '#f0edf6',
-    inactiveColor: '#3e2465',
-    barStyle: { backgroundColor: '#694fad' },
-  }
-);
+const MainNavigator = createStackNavigator({
+  Home: { screen: App },
+  Results: { screen: ResultsScreen },
+  Board: { screen: BoardScreen },
+});
 
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(MainNavigator);
 
 export default AppContainer;
