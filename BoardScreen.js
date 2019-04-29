@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  AsyncStorage,
-  ScrollView,
-  Alert,
-  logVisibleChange,
-} from 'react-native';
+import { Text, View, AsyncStorage, ScrollView, Alert } from 'react-native';
 import BoardContainer from './BoardContainer.js';
 import styles from './Style.js';
 import TabNavigator from './TabNavigator.js';

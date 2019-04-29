@@ -1,11 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ResultsScreen from './Results';
 import styles from './Style.js';
 import BoardScreen from './BoardScreen';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import TabNavigator from './TabNavigator';
 
 class App extends React.Component {

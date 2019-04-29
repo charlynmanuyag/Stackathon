@@ -99,6 +99,8 @@ export default class BarContainer extends React.Component {
                     phone: bar.display_phone,
                     rating: bar.rating,
                     price: bar.price,
+                    longitude: bar.coordinates.longitude,
+                    latitude: bar.coordinates.latitude,
                   })
                 }
                 style={styles.pinMe}

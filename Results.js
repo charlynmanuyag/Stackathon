@@ -70,11 +70,6 @@ export default class ResultsScreen extends React.Component {
                   Here are the bars close to you{' '}
                 </Text>
                 <BarContainer bars={this.state.bars} {...this.props} />
-                <Button
-                  onPress={() => navigate('Board')}
-                  title="Click to Board"
-                  color="black"
-                />
               </View>
             ) : (
               <Text
@@ -84,7 +79,7 @@ export default class ResultsScreen extends React.Component {
                   justifyContent: 'center',
                 }}
               >
-                Hold on. We are looking bars near you!
+                Hold on. We are looking for bars near you!
               </Text>
             )}
           </View>
