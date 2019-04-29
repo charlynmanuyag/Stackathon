@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, Text, Button } from 'react-native';
 import BarContainer from './BarContainer';
 import yelpToken from './secret.js';
-import { Location, Permissions, MapView } from 'expo';
+import { Location, Permissions } from 'expo';
 import styles from './Style.js';
 import TabNavigator from './TabNavigator';
 
@@ -19,7 +19,7 @@ export default class ResultsScreen extends React.Component {
   }
   async getYelpAPI(lat, long) {
     try {
-      let url = `https://api.yelp.com/v3/businesses/search?term=bars&latitude=${lat}&longitude=${long}&limit=3`;
+      let url = `https://api.yelp.com/v3/businesses/search?term=bars&latitude=${lat}&longitude=${long}&limit=10`;
       await fetch(url, {
         method: 'GET',
         headers: {
@@ -59,7 +59,6 @@ export default class ResultsScreen extends React.Component {
   }
 
   render() {
-    console.log('in results');
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
@@ -90,34 +89,10 @@ export default class ResultsScreen extends React.Component {
             )}
           </View>
         </ScrollView>
+        <View>
+          <TabNavigator navigate={navigate} />
+        </View>
       </View>
     );
   }
 }
-
-// const { navigation } = this.props;
-// console.log(navigation);
-// console.log(
-//   'PROPS',
-//   JSON.stringify(navigation.getParam('latitude', 'someDefault'))
-// );
-
-// <MapView
-//           style={styles.map}
-//           initialRegion={{
-//             latitude: this.state.location.coords.latitude,
-//             longitude: this.state.location.coords.longitude,
-//             latitudeDelta: 0.0922,
-//             longitudeDelta: 0.0421,
-//           }}
-//         />
-
-//  <Button
-//               onPress={() =>
-//                 navigate('Results', {
-//                   latitude: this.state.location.coords.latitude,
-//                 })
-//               }
-//               title="Press Me"
-//               color="black"
-//             />

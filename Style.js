@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingLeft: 30,
+    paddingRight: 30,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.8,
@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginTop: 10,
+  },
+  boardTitle: {
+    fontFamily: 'MarkerFelt-Thin',
+    fontSize: 28,
+    justifyContent: 'center',
   },
 });
 

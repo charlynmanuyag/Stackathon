@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   AsyncStorage,
+  Alert,
 } from 'react-native';
 import styles from './Style.js';
 
@@ -41,8 +42,9 @@ export default class BarContainer extends React.Component {
     this.getBarId(barId).then(response => {
       if (!response) {
         this.storeBarId(barId, barInfo);
+        Alert.alert('You successfully pinned me!');
       } else {
-        console.log('You already pinned me');
+        Alert.alert('You already pinned me!');
       }
     });
   }

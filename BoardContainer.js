@@ -1,20 +1,24 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  logVisibleChange,
+} from 'react-native';
 import styles from './Style';
 
 export default class BoardContainer extends React.Component {
-  // constructor() {
-  //   super()
-  //   this.handleUnpin = this.handleUnpin.bind(this)
-  // }
-  // async unPin(id) {
-  //   try {
-  //     uu
-  //   }
-  // }
-  // handleUnpin() {
-
-  // }
+  componentDidUpdate(nextProps, nextState) {
+    if (this.state.someStatefulValue !== nextState.someStatefulValue) {
+      nextProps.onChange(nextState.someStatefulValue);
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isVisible !== prevProps.isVisible) {
+      logVisibleChange(this.props.isVisible);
+    }
+  }
   render() {
     const bars = this.props.bars;
     return (
@@ -45,7 +49,7 @@ export default class BoardContainer extends React.Component {
               </Text>
               <TouchableOpacity
                 style={styles.unpinMe}
-                // onPress={() => this.handleUnpin()}
+                onPress={() => this.props.handleUnpin(bar[0])}
               >
                 <Text
                   style={{
